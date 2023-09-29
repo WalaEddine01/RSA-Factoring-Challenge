@@ -1,0 +1,70 @@
+#!/usr/bin/python3
+"""
+This modual is to Factorize as many numbers as possible
+"""
+import sys
+import time
+
+
+def is_pri(n):
+    """
+    This function check if n is prime number
+
+    Args:
+        n (int): the input number to test
+    Return:
+
+        true if n is prime number false otherwise
+    """
+    return n > 1 and all(n % i != 0 for i in range(2, int(n**0.5) + 1))
+
+
+def fact(n):
+    """
+    This function returns the Factorize numbers
+
+    Args:
+        n (int): the input number to Factorize
+    Return:
+        The Factoriz Number
+    """
+    f = []
+    for k in range(2, int(n / 2) + 1):
+        if is_pri(k) == 1:
+            if n % k == 0:
+                b = k
+                c = int(n / k)
+                if is_pri(c) == 1:
+                    f.append(c)
+                    f.append(b)
+                    return f
+    return None
+
+
+def main():
+    """
+    This main function
+
+    Raises:
+        FileNotFoundError: if the file don't exist
+    """
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        exit()
+    try:
+        file = open(sys.argv[1], "r")
+        a = file.readlines()
+        s = time.time()
+        a[0] = int(a[0])
+        f = fact(a[0])
+        if f is None:
+            print(None)
+        else:
+            print(f"{a[0]}={f[0]}*{f[1]}")
+        if time.time() - s > 5:
+            exit("out of the time")
+    except FileNotFoundError:
+        print(f"Error: '{sys.argv[1]}' does not exist")
+
+
+main()
