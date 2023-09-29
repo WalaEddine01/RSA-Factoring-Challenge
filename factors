@@ -48,7 +48,7 @@ def main():
             if time.time() - s > 5:
                 exit("out of the time")
     except FileNotFoundError:
-        print("file did not found")
+        print(f"Error: '{sys.argv[1]}' does not exist")
 
 
 main()
