@@ -16,7 +16,12 @@ def is_pri(n):
 
         true if n is prime number false otherwise
     """
-    return n > 1 and all(n % i != 0 for i in range(2, int(n**0.5) + 1))
+    if n < 2:
+        return 0
+    for i in range(2, int(n / 2) + 1):
+        if n % i == 0:
+            return 0
+    return 1
 
 
 def fact(n):
@@ -29,15 +34,14 @@ def fact(n):
         The Factoriz Number
     """
     f = []
-    for k in range(2, int(n / 2) + 1):
-        if is_pri(k) == 1:
-            if n % k == 0:
-                b = k
-                c = int(n / k)
-                if is_pri(c) == 1:
-                    f.append(c)
-                    f.append(b)
-                    return f
+    for k in range(2, int(n / 2)):
+        if n % k == 0:
+            b = k
+            c = int(n / k)
+            if is_pri(c) == 1 and is_pri(b) == 1:
+                f.append(c)
+                f.append(b)
+                return f
     return None
 
 
