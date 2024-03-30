@@ -13,7 +13,6 @@ def is_pri(n):
     Args:
         n (int): the input number to test
     Return:
-
         true if n is prime number false otherwise
     """
     if n < 2:
